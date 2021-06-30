@@ -1,4 +1,6 @@
 class Contact
+  @@contacts = []
+  @@id = 1
 
   # This method should initialize the contact's attributes
   def initialize(first_name, last_name, email, note)
@@ -6,18 +8,27 @@ class Contact
     @last_name = last_name
     @email = email
     @note = note
-
+    @id = @@id
+    @@id +=1
   end
+
+  attr_reader :id
+  attr_accessor :first_name, :last_name, :email, :note
+
+
 
   # This method should call the initializer, 
   # store the newly created contact, and then return it
-  def self.create
+  def self.create(first_name, last_name, email, note)
+    new_contact=Contact.new(first_name, last_name, email, note)
+    @@contacts << new_contact
+    return new_contact
 
   end
 
   # This method should return all of the existing contacts
   def self.all
-
+    return @@contacts
   end
 
   # This method should accept an id as an argument
@@ -60,3 +71,7 @@ class Contact
   # Feel free to add other methods here, if you need them.
   
 end
+
+Contact.create('Betty', 'Maker', 'bettymakes@gmail.com', 'Loves Pokemon')
+Contact.create("Funny","Guy","laughing@yahoo.com", "not so funny")
+p Contact.all
