@@ -63,10 +63,13 @@ class Contact
   
   # def update -- changed to MODIFY in order to reflect description of CRM in doc
 
-  def modify (id_number,contact_attribute, new_value)
+  def modify(id_number,contact_attribute, new_value)
+    puts "========================================"
+    puts "MODIFYING SELECTED CONTACT"
     @@contacts.each do |contact|
-      if contact.id == id_number && contact_attribute=="first name"
+      if contact.id == id_number && contact_attribute=="1"
         contact.first_name=new_value
+        p contact
       elsif contact.id == id_number && contact_attribute=="last name"
         contact.last_name=new_value
       elsif contact.id == id_number && contact_attribute=="email"
@@ -87,22 +90,24 @@ class Contact
     @@contacts.each do |contact|
       if attribute == "first name" && contact.first_name==value
         found +=1
-        return contact
+        p contact
       elsif attribute == "last name" && contact.last_name==value
         found +=1
-        return contact
+        p contact
       elsif attribute == "email" && contact.email==value
         found +=1
-        return contact
+        p contact
       elsif attribute == "note" && contact.note==value
         found +=1
-        return contact
+        p contact
       end
     end
       if found==0 
-        return "No results found."
+        puts ""
+        puts "No results found."
       else
-        return "#{found} results found."
+        puts ""
+        puts "#{found} result(s) found."
       end
   end
 

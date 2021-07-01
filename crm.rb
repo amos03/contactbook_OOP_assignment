@@ -68,14 +68,18 @@ end
     puts "[2] Last Name"
     puts "[3] Email"
     puts "[4] Note"
-    attribute=gets.chomp.to_i
+    contact_attribute=gets.chomp.to_i
     puts "Please enter the new value:"
     new_value=gets.chomp
-    
+    ###I AM NOT ABLE TO CALL THE METHOD I know Contact.modify is wrong but I've tried many other ways
+    Contact.modify(id_number, contact_attribute, new_value)
   end
 
   def delete_contact
-
+  puts "Please enter the ID number of the contact you wish to delete:"
+  id_number=gets.chomp.to_i
+  Contact.delete(id_number)
+  # same problem as above - how do I call this instance method?
   end
 
   def display_all_contacts
@@ -83,7 +87,13 @@ end
   end
 
   def search_by_attribute
-    
+    puts "============================"
+    puts "Search by attribute and value"
+    puts "Please enter the attribute (first name, last name, email, note) to search by:"
+    attribute = gets.chomp
+    puts "Please enter the value"
+    value = gets.chomp
+    Contact.find_by(attribute, value)
   end
 
 def delete_all
