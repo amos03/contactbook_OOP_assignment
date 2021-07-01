@@ -54,8 +54,19 @@ class Contact
   
   # def update -- changed to MODIFY in order to reflect description of CRM in doc
 
-  def modify (id_number)
-    p @@contacts[id_number -1]
+  def modify (id_number,contact_attribute, new_value)
+    @@contacts.each do |contact|
+      if contact.id == id_number && contact_attribute=="first name"
+        contact.first_name=new_value
+      elsif contact.id == id_number && contact_attribute=="last name"
+        contact.last_name=new_value
+      elsif contact.id == id_number && contact_attribute=="email"
+          contact.email=new_value
+        elsif contact.id == id_number && contact_attribute=="note"
+          contact.note=new_value
+      end
+    end
+  end
 
   end
 
@@ -63,22 +74,41 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by
-
+  def self.find_by (attribute, value)
+    found = 0
+    @@contacts.each do |contact|
+      if attribute == "first name" && contact.first_name==value
+        found +=1
+        return contact
+      elsif attribute == "last name" && contact.last_name==value
+        found +=1
+        return contact
+      elsif attribute == "email" && contact.email==value
+        found +=1
+        return contact
+      elsif attribute == "note" && contact.note==value
+        found +=1
+        return contact
+      end
+    end
+      if found==0 
+        return "No results found."
+      else
+        return "#{found} results found."
+      end
   end
 
   # This method should delete all of the contacts
   def self.delete_all
-
+    @@contacts=[]
   end
 
   def full_name
-
   end
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def delete
+  def delete(id_number)
 
   end
 
