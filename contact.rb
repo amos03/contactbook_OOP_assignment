@@ -33,16 +33,29 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find(id_number)
-    p @@contacts[id_number-1]
+  # two methods below, the commented one works but is vulnerable since IDs could change
 
+  # def self.find(id_number)
+  #   @@contacts[id_number-1]
+  # end
+
+  def self.find(id_number)
+    @@contacts.each do |contact|
+      if contact.id == id_number
+        return contact
+      end
+    end
   end
 
   # This method should allow you to specify 
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update
+  
+  # def update -- changed to MODIFY in order to reflect description of CRM in doc
+
+  def modify (id_number)
+    p @@contacts[id_number -1]
 
   end
 
@@ -73,7 +86,14 @@ class Contact
   
 end
 
+puts "Creating Contacts"
 Contact.create('Betty', 'Maker', 'bettymakes@gmail.com', 'Loves Pokemon')
 Contact.create("Funny","Guy","laughing@yahoo.com", "not so funny")
 Contact.create("Dorian","Gray","pictures@outlook.com","a bit vain")
-Contact.find(3)
+puts "-------------------------------------------------------------------"
+puts "Displaying Contacts"
+p Contact.all
+puts "-------------------------------------------------------------------"
+puts "Testing Find by ID"
+p Contact.find(3)
+puts "-------------------------------------------------------------------"
