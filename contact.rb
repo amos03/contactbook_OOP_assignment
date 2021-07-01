@@ -37,24 +37,24 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  # two methods below, the commented one works but is vulnerable since IDs could change
-
-  # def self.find(id_number)
-  #   @@contacts[id_number-1]
-  # end
+  # two methods below, the first one works but is vulnerable since IDs could change
 
   def self.find(id_number)
-    puts "========================================"
-    puts "Found the following matches for your search of ID number #{id_number}:"
-    @@contacts.each do |contact|
-      if contact.id == id_number
-        puts ""      
-        p contact
-      else
-        puts "None found"
-      end
-    end
+    @@contacts[id_number-1]
   end
+
+  # def self.find(id_number)
+  #   puts "========================================"
+  #   puts "Found the following matches for your search of ID number #{id_number}:"
+  #   @@contacts.each do |contact|
+  #     if contact.id == id_number
+  #       puts ""      
+  #       p contact
+  #     else
+  #       puts "None found"
+  #     end
+  #   end
+  # end
 
   # This method should allow you to specify 
   # 1. which of the contact's attributes you want to update
@@ -63,21 +63,35 @@ class Contact
   
   # def update -- changed to MODIFY in order to reflect description of CRM in doc
 
-  def modify(id_number,contact_attribute, new_value)
+  # def modify(id_number, contact_attribute, new_value)
+  #   puts "========================================"
+  #   puts "MODIFYING SELECTED CONTACT"
+    # @@contacts.each do |contact|
+    #   if contact.id == id_number && contact_attribute==1
+    #     contact.first_name=new_value
+    #     p contact
+    #   elsif contact.id == id_number && contact_attribute==2
+    #     contact.last_name=new_value
+    #   elsif contact.id == id_number && contact_attribute==3
+    #       contact.email=new_value
+    #     elsif contact.id == id_number && contact_attribute==4
+    #       contact.note=new_value
+    #   end
+    # end
+    def modify(contact_attribute, new_value)
     puts "========================================"
     puts "MODIFYING SELECTED CONTACT"
-    @@contacts.each do |contact|
-      if contact.id == id_number && contact_attribute=="1"
-        contact.first_name=new_value
-        p contact
-      elsif contact.id == id_number && contact_attribute=="last name"
-        contact.last_name=new_value
-      elsif contact.id == id_number && contact_attribute=="email"
-          contact.email=new_value
-        elsif contact.id == id_number && contact_attribute=="note"
-          contact.note=new_value
-      end
+    case contact_attribute
+    when 1
+      self.first_name=new_value
+    when 2
+      self.last_name=new_value
+    when 3
+      self.email=new_value
+    when 4
+      self.note=new_value
     end
+    p self
   end
 
 
@@ -124,12 +138,17 @@ class Contact
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def delete(id_number)
-    @@contacts.select! do |contact| contact.id != id_number
-    end
-  end
+  # def delete(id_number)
+  #   @@contacts.select! do |contact| contact.id != id_number
+  #   end
+  # end
+
+def delete
+  @@contacts.delete(self) 
+end
 
   # Feel free to add other methods here, if you need them.
+
 
 
 end
