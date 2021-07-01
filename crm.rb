@@ -83,17 +83,18 @@ end
 
   end
 
-
   def delete_contact
   puts "Please enter the ID number of the contact you wish to delete:"
   id_number=gets.chomp.to_i
 
   contact=Contact.find(id_number)
-  contact.delete  
+  
+    if contact==nil
+      puts "No contact with that ID found."
+    else
+      contact.delete  
+    end
 
-  # contact=Contact.find(id_number)
-  # contact.delete(id_number)
-  # # same problem as above - how do I call this instance method?
   end
 
   def display_all_contacts
