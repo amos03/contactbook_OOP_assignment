@@ -33,7 +33,8 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find
+  def self.find(id_number)
+    p @@contacts[id_number-1]
 
   end
 
@@ -74,4 +75,5 @@ end
 
 Contact.create('Betty', 'Maker', 'bettymakes@gmail.com', 'Loves Pokemon')
 Contact.create("Funny","Guy","laughing@yahoo.com", "not so funny")
-p Contact.all
+Contact.create("Dorian","Gray","pictures@outlook.com","a bit vain")
+Contact.find(3)
