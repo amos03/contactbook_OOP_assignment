@@ -20,15 +20,19 @@ class Contact
   # This method should call the initializer, 
   # store the newly created contact, and then return it
   def self.create(first_name, last_name, email, note)
+    puts "========================================"
+    puts "NEW CONTACT ADDED:"
     new_contact=Contact.new(first_name, last_name, email, note)
     @@contacts << new_contact
-    return new_contact
+    p new_contact
 
   end
 
   # This method should return all of the existing contacts
   def self.all
-    return @@contacts
+    puts "========================================"
+    puts "CONTACTS STORED:"
+    p @@contacts
   end
 
   # This method should accept an id as an argument
@@ -40,9 +44,14 @@ class Contact
   # end
 
   def self.find(id_number)
+    puts "========================================"
+    puts "Found the following matches for your search of ID number #{id_number}:"
     @@contacts.each do |contact|
       if contact.id == id_number
-        return contact
+        puts ""      
+        p contact
+      else
+        puts "None found"
       end
     end
   end
@@ -68,7 +77,6 @@ class Contact
     end
   end
 
-  end
 
   # This method should work similarly to the find method above
   # but it should allow you to search for a contact using attributes other than id
@@ -101,29 +109,39 @@ class Contact
   # This method should delete all of the contacts
   def self.delete_all
     @@contacts=[]
+    p @@contacts
+    puts "All contacts deleted."
   end
 
   def full_name
+    "#{first_name} #{last_name}"
   end
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
   def delete(id_number)
-
+    @@contacts.select! do |contact| contact.id != id_number
+    end
   end
 
   # Feel free to add other methods here, if you need them.
-  
+
+
 end
 
-puts "Creating Contacts"
-Contact.create('Betty', 'Maker', 'bettymakes@gmail.com', 'Loves Pokemon')
-Contact.create("Funny","Guy","laughing@yahoo.com", "not so funny")
-Contact.create("Dorian","Gray","pictures@outlook.com","a bit vain")
-puts "-------------------------------------------------------------------"
-puts "Displaying Contacts"
-p Contact.all
-puts "-------------------------------------------------------------------"
-puts "Testing Find by ID"
-p Contact.find(3)
-puts "-------------------------------------------------------------------"
+# puts "Creating Contacts"
+# Contact.create('Betty', 'Maker', 'bettymakes@gmail.com', 'Loves Pokemon')
+# Contact.create("Funny","Guy","laughing@yahoo.com", "not so funny")
+# Contact.create("Dorian","Gray","pictures@outlook.com","a bit vain")
+# puts "-------------------------------------------------------------------"
+# puts "Displaying Contacts"
+# p Contact.all
+# puts "-------------------------------------------------------------------"
+# puts "Testing Find by ID"
+# p Contact.find(3)
+# puts "-------------------------------------------------------------------"
+# puts "Testing Find by Attribute: search first name = Betty"
+# p Contact.find_by("first name", "Betty")
+# puts "Testing Find by Attribute: search last name = Gray"
+# p Contact.find_by("last name","Gray")
+# puts "-------------------------------------------------------------------"
